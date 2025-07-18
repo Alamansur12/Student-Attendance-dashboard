@@ -1,41 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="Viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Personal Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abubakar Nasiru Almansur | Web Developer</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #fff;
+      background-color: #0b0c10;
+    }
+
+    a {
+      color: #66fcf1;
+      text-decoration: none;
+    }
+
+    h1, h2, h3, h4 {
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    /* Hero */
+    .hero {
+      background: url('https://placehold.co/1600x800?text=Iman+Abubakar') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #c5c6c7;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      background: #45a29e;
+      color: #000;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #66fcf1;
+    }
+
+    /* About */
+    .about {
+      padding: 60px 20px;
+      background-color: #1f2833;
+    }
+
+    .about h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Services */
+    .services {
+      padding: 60px 20px;
+      background-color: #1f2833;
+    }
+
+    .services h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .service-card {
+      background: #0b0c10;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(102, 252, 241, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Contact */
+    .contact {
+      padding: 60px 20px;
+      background-color: #1f2833;
+    }
+
+    .contact h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-info {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #c5c6c7;
+      color: #000;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      background: #45a29e;
+      color: #000;
+      border: none;
+      padding: 12px;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background: #66fcf1;
+    }
+
+    .form-status {
+      text-align: center;
+      margin-top: 10px;
+      color: #66fcf1;
+    }
+
+    /* Footer */
+    footer {
+      background: #0b0c10;
+      text-align: center;
+      padding: 20px;
+      color: #66fcf1;
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <a href="#" class="logo"><i><b>Almansur..</b></i></a>
-    <nav class="navbar">
-      <a href="#" class="active">Home</a>
-       <a href="#">About</a>
-       <a href="#">Contact</a>
-      
-    </nav>
-     
-  </header>
-  <section class="home">
-    <div class="home-content">
-      <h1>
-        Hi, Am Almansur Abubakar Nasiru
-      </h1>
-      <h3>
-        Frontend Developer
-      </h3>
-      <p>
-         
-      </p>
-      <div class="btn-box">
-        <a href="#">Hire Me</a>
-        <a href="#">Let talk</a>
+
+  <header class="hero">
+    <div class="overlay">
+      <div class="content">
+        <h1>I'm Abubakar Nasiru Almansur</h1>
+        <p>Full Stack Developer | Student at Northwest University Kano</p>
+        <a href="#contact" class="btn">Hire Me</a>
       </div>
     </div>
-    <span class="home-imgHover"></span>
+  </header>
+
+  <section class="about" id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>
+        I'm a passionate Full Stack web developer with a strong foundation in both front-end and back-end technologies. I specialize in building modern, responsive, and dynamic websites tailored to your business needs.
+      </p>
+    </div>
   </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <h2>My Services</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <h3>Frontend Development</h3>
+          <p>Pixel-perfect, responsive UIs using HTML, CSS, JavaScript, and frameworks like React.</p>
+        </div>
+        <div class="service-card">
+          <h3>Backend Development</h3>
+          <p>Robust backend systems using Node.js, Express, Python, PHP, and databases like MongoDB or MySQL.</p>
+        </div>
+        <div class="service-card">
+          <h3>Full Website Design</h3>
+          <p>From concept to deployment, I build complete websites that are fast, secure, and scalable.</p>
+        </div>
+        <div class="service-card">
+          <h3>Website Maintenance</h3>
+          <p>Keep your site updated, secure, and running smoothly with regular maintenance and support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <div class="contact-info">
+        <p><strong>Phone:</strong> 09076729352</p>
+        <p><strong>Email:</strong> abubakarnasirualmansur@gmail.com</p>
+        <p><strong>Location:</strong> Northwest University, Kano, Nigeria</p>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+      <p class="form-status" id="formStatus"></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Abubakar Nasiru Almansur. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Contact form handler
+    document.getElementById('contactForm')?.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const status = document.getElementById('formStatus');
+      status.textContent = "Thank you! Your message has been sent.";
+      this.reset();
+    });
+  </script>
 </body>
 </html>
