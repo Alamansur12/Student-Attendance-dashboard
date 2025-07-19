@@ -5,80 +5,103 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Student Attendance Dashboard</title>
   <style>
-    /* Reset & Base Styles */
+    /* Base Reset */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(to right, #141e30, #243b55);
+      min-height: 100vh;
+      padding: 40px 20px;
       color: #fff;
-      padding: 20px;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 20px;
       font-size: 2rem;
+      margin-bottom: 30px;
     }
 
     .container {
       max-width: 900px;
-      margin: 0 auto;
+      margin: auto;
+      padding: 0 20px;
     }
 
-    .week-selector {
+    /* Week Selector */
+    .week-picker {
       display: flex;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
-    select {
-      padding: 10px 15px;
-      border-radius: 8px;
+    input[type="week"] {
+      background: rgba(255, 255, 255, 0.1);
       border: none;
-      font-size: 1rem;
-      background: #1f1f2e;
+      padding: 12px 20px;
+      border-radius: 10px;
       color: #fff;
+      font-size: 1rem;
+      backdrop-filter: blur(10px);
     }
 
+    /* Summary Cards */
     .summary {
       display: flex;
-      justify-content: space-around;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .summary-card {
+      flex: 1;
+      min-width: 180px;
       background: rgba(255, 255, 255, 0.1);
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-
-    .summary div {
-      text-align: center;
-    }
-
-    .summary span {
-      display: block;
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    .student-list {
-      background: #1f1f2e;
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .summary-card span {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    /* Student List */
+    .student-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     .student {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #2a2a37;
-      padding: 15px 20px;
-      margin-bottom: 10px;
-      border-radius: 8px;
       flex-wrap: wrap;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: background 0.3s ease;
+    }
+
+    .student:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
 
     .student-info {
@@ -87,12 +110,12 @@
 
     .student-name {
       font-size: 1.1rem;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     .student-id {
       font-size: 0.9rem;
-      color: #aaa;
+      color: #ccc;
     }
 
     .actions {
@@ -101,120 +124,139 @@
     }
 
     button {
-      padding: 8px 15px;
+      padding: 8px 16px;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-present {
+      background-color: #66bb6a;
+    }
+
+    .btn-present:hover {
+      background-color: #388e3c;
+    }
+
+    .btn-absent {
+      background-color: #ef5350;
+    }
+
+    .btn-absent:hover {
+      background-color: #d32f2f;
+    }
+
+    .marked {
+      background-color: #888 !important;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Export Button */
+    .export-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       cursor: pointer;
       transition: background 0.3s ease;
     }
 
-    .present {
-      background-color: #4caf50;
+    .export-btn:hover {
+      background: #388e3c;
     }
 
-    .present:hover {
-      background-color: #45a049;
-    }
-
-    .absent {
-      background-color: #f44336;
-    }
-
-    .absent:hover {
-      background-color: #e53935;
-    }
-
-    .marked {
-      background-color: #666 !important;
-      pointer-events: none;
-      cursor: not-allowed;
-    }
-
+    /* Responsive */
     @media (max-width: 600px) {
-      .student {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
       .actions {
         width: 100%;
         justify-content: flex-end;
         margin-top: 10px;
       }
+
+      .student {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
+
   <div class="container">
     <h1>Student Attendance Dashboard</h1>
 
     <!-- Week Selector -->
-    <div class="week-selector">
-      <select id="weekSelect">
-        <option value="week1">Week 1</option>
-        <option value="week2">Week 2</option>
-        <option value="week3">Week 3</option>
-        <option value="week4">Week 4</option>
-      </select>
+    <div class="week-picker">
+      <input type="week" id="weekPicker" />
     </div>
 
-    <!-- Summary Section -->
+    <!-- Summary -->
     <div class="summary">
-      <div>
+      <div class="summary-card">
         <span id="total">0</span>Total
       </div>
-      <div>
+      <div class="summary-card">
         <span id="present">0</span>Present
       </div>
-      <div>
+      <div class="summary-card">
         <span id="absent">0</span>Absent
       </div>
     </div>
 
     <!-- Student List -->
     <div class="student-list" id="studentList">
-      <!-- Student cards will be dynamically added -->
+      <!-- Dynamic content here -->
     </div>
   </div>
 
+  <!-- Export Button -->
+  <button class="export-btn" title="Export to CSV" onclick="exportToCSV()">💾</button>
+
   <script>
-    // Sample student data
     const students = [
       { id: "UG22ICT1014", name: "Abubakar Nasiru Almansur" },
-      { id: "UG22SEN1001", name: "Muhsin Ibrahim" },
-      { id: "UG22ICT1111", name: "Muhammad Junaidu" },
-      { id: "UG22ICT1029", name: "Mansur Mannir" },
-      { id: "UG22ICT1109", name: "Umar Musa" }
+      { id: "UG22ICT1099", name: "Muhammad junaidu" },
+      { id: "UG23ICT178", name: "Fareedah Baffa" },
+      { id: "UG22SEN1023", name: "Muhsin Ibrahim" },
+      { id: "UG22ICT1023", name: "Mansur Mannir" }
     ];
 
-    const attendance = {}; // Store attendance per week per student
+    const attendance = {}; // { "week1-S001": "present", ... }
 
     const studentList = document.getElementById("studentList");
-    const weekSelect = document.getElementById("weekSelect");
+    const weekPicker = document.getElementById("weekPicker");
     const totalSpan = document.getElementById("total");
     const presentSpan = document.getElementById("present");
     const absentSpan = document.getElementById("absent");
 
     function updateSummary() {
-      let presentCount = 0;
-      let absentCount = 0;
-      const currentWeek = weekSelect.value;
+      const week = weekPicker.value || "default";
+      let present = 0, absent = 0;
 
-      students.forEach(student => {
-        const status = attendance[`${currentWeek}-${student.id}`];
-        if (status === "present") presentCount++;
-        else if (status === "absent") absentCount++;
+      students.forEach(s => {
+        const status = attendance[`${week}-${s.id}`];
+        if (status === "present") present++;
+        else if (status === "absent") absent++;
       });
 
       totalSpan.textContent = students.length;
-      presentSpan.textContent = presentCount;
-      absentSpan.textContent = absentCount;
+      presentSpan.textContent = present;
+      absentSpan.textContent = absent;
     }
 
     function renderStudents() {
       studentList.innerHTML = "";
-      const currentWeek = weekSelect.value;
+      const week = weekPicker.value || "default";
 
       students.forEach(student => {
         const studentDiv = document.createElement("div");
@@ -222,7 +264,10 @@
 
         const infoDiv = document.createElement("div");
         infoDiv.className = "student-info";
-        infoDiv.innerHTML = `<div class="student-name">${student.name}</div><div class="student-id">ID: ${student.id}</div>`;
+        infoDiv.innerHTML = `
+          <div class="student-name">${student.name}</div>
+          <div class="student-id">ID: ${student.id}</div>
+        `;
         studentDiv.appendChild(infoDiv);
 
         const actionsDiv = document.createElement("div");
@@ -230,29 +275,29 @@
 
         const presentBtn = document.createElement("button");
         presentBtn.textContent = "Present";
-        presentBtn.className = "present";
+        presentBtn.className = "btn-present";
         presentBtn.addEventListener("click", () => {
-          markAttendance(student.id, currentWeek, "present");
+          markAttendance(student.id, week, "present");
           renderStudents();
         });
 
         const absentBtn = document.createElement("button");
         absentBtn.textContent = "Absent";
-        absentBtn.className = "absent";
+        absentBtn.className = "btn-absent";
         absentBtn.addEventListener("click", () => {
-          markAttendance(student.id, currentWeek, "absent");
+          markAttendance(student.id, week, "absent");
           renderStudents();
         });
 
-        const key = `${currentWeek}-${student.id}`;
-        const markedStatus = attendance[key];
+        const key = `${week}-${student.id}`;
+        const status = attendance[key];
 
-        if (markedStatus === "present") {
-          presentBtn.textContent = "Present";
+        if (status === "present") {
+          presentBtn.textContent = "✔ Present";
           presentBtn.className += " marked";
           actionsDiv.appendChild(presentBtn);
-        } else if (markedStatus === "absent") {
-          absentBtn.textContent = "Absent";
+        } else if (status === "absent") {
+          absentBtn.textContent = "✘ Absent";
           absentBtn.className += " marked";
           actionsDiv.appendChild(absentBtn);
         } else {
@@ -267,13 +312,39 @@
       updateSummary();
     }
 
-    function markAttendance(studentId, week, status) {
-      attendance[`${week}-${studentId}`] = status;
+    function markAttendance(id, week, status) {
+      attendance[`${week}-${id}`] = status;
     }
 
-    weekSelect.addEventListener("change", () => {
-      renderStudents();
-    });
+    weekPicker.addEventListener("change", renderStudents);
+
+    // Export to CSV
+    function exportToCSV() {
+      const csvRows = [];
+
+      // CSV header
+      csvRows.push(["Week", "Student ID", "Name", "Status"].join(","));
+
+      // CSV rows
+      for (const key in attendance) {
+        const [week, id] = key.split("-");
+        const student = students.find(s => s.id === id);
+        if (student) {
+          csvRows.push([week, id, student.name, attendance[key]].join(","));
+        }
+      }
+
+      // Create CSV file
+      const csvString = csvRows.join("\n");
+      const blob = new Blob([csvString], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `attendance_export_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
 
     // Initial render
     renderStudents();
