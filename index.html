@@ -154,27 +154,6 @@
       pointer-events: none;
     }
 
-    /* Export Button */
-    .export-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #4caf50;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 24px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .export-btn:hover {
-      background: #388e3c;
-    }
-
     /* Responsive */
     @media (max-width: 600px) {
       .actions {
@@ -219,16 +198,13 @@
     </div>
   </div>
 
-  <!-- Export Button -->
-  <button class="export-btn" title="Export to CSV" onclick="exportToCSV()">💾</button>
-
   <script>
     const students = [
-      { id: "UG22ICT1014", name: "Abubakar Nasiru Almansur" },
-      { id: "UG22ICT1099", name: "Muhammad junaidu" },
-      { id: "UG23ICT178", name: "Fareedah Baffa" },
-      { id: "UG22SEN1023", name: "Muhsin Ibrahim" },
-      { id: "UG22ICT1023", name: "Mansur Mannir" }
+      { id: "S001", name: "Alice Johnson" },
+      { id: "S002", name: "Bob Smith" },
+      { id: "S003", name: "Charlie Davis" },
+      { id: "S004", name: "Diana Moore" },
+      { id: "S005", name: "Ethan Lee" }
     ];
 
     const attendance = {}; // { "week1-S001": "present", ... }
@@ -317,34 +293,6 @@
     }
 
     weekPicker.addEventListener("change", renderStudents);
-
-    // Export to CSV
-    function exportToCSV() {
-      const csvRows = [];
-
-      // CSV header
-      csvRows.push(["Week", "Student ID", "Name", "Status"].join(","));
-
-      // CSV rows
-      for (const key in attendance) {
-        const [week, id] = key.split("-");
-        const student = students.find(s => s.id === id);
-        if (student) {
-          csvRows.push([week, id, student.name, attendance[key]].join(","));
-        }
-      }
-
-      // Create CSV file
-      const csvString = csvRows.join("\n");
-      const blob = new Blob([csvString], { type: "text/csv" });
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `attendance_export_${new Date().toISOString().slice(0, 10)}.csv`;
-      a.click();
-      URL.revokeObjectURL(url);
-    }
 
     // Initial render
     renderStudents();
