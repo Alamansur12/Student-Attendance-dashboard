@@ -3,259 +3,280 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abubakar Nasiru Almansur | Web Developer</title>
+  <title>Student Attendance Dashboard</title>
   <style>
-    /* Reset */
+    /* Reset & Base Styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       color: #fff;
-      background-color: #0b0c10;
+      padding: 20px;
     }
 
-    a {
-      color: #66fcf1;
-      text-decoration: none;
-    }
-
-    h1, h2, h3, h4 {
-      color: #ffffff;
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
     }
 
     .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 0 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    /* Hero */
-    .hero {
-      background: url('https://placehold.co/1600x800?text=Iman+Abubakar') no-repeat center center/cover;
-      height: 100vh;
+    .week-selector {
       display: flex;
-      align-items: center;
       justify-content: center;
-    }
-
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.7);
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 20px;
-    }
-
-    .content h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .content p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      color: #c5c6c7;
-    }
-
-    .btn {
-      padding: 12px 24px;
-      background: #45a29e;
-      color: #000;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-
-    .btn:hover {
-      background: #66fcf1;
-    }
-
-    /* About */
-    .about {
-      padding: 60px 20px;
-      background-color: #1f2833;
-    }
-
-    .about h2 {
-      text-align: center;
       margin-bottom: 20px;
     }
 
-    /* Services */
-    .services {
-      padding: 60px 20px;
-      background-color: #1f2833;
-    }
-
-    .services h2 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .service-card {
-      background: #0b0c10;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(102, 252, 241, 0.2);
-      transition: transform 0.3s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-5px);
-    }
-
-    /* Contact */
-    .contact {
-      padding: 60px 20px;
-      background-color: #1f2833;
-    }
-
-    .contact h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .contact-info {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .contact-form {
-      max-width: 600px;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      padding: 12px;
-      border: none;
+    select {
+      padding: 10px 15px;
       border-radius: 8px;
-      background: #c5c6c7;
-      color: #000;
+      border: none;
       font-size: 1rem;
+      background: #1f1f2e;
+      color: #fff;
     }
 
-    .contact-form button {
-      background: #45a29e;
-      color: #000;
-      border: none;
-      padding: 12px;
+    .summary {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .summary div {
+      text-align: center;
+    }
+
+    .summary span {
+      display: block;
+      font-size: 1.2rem;
       font-weight: bold;
-      border-radius: 30px;
+    }
+
+    .student-list {
+      background: #1f1f2e;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .student {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #2a2a37;
+      padding: 15px 20px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      flex-wrap: wrap;
+    }
+
+    .student-info {
+      flex: 1;
+    }
+
+    .student-name {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .student-id {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
       cursor: pointer;
       transition: background 0.3s ease;
     }
 
-    .contact-form button:hover {
-      background: #66fcf1;
+    .present {
+      background-color: #4caf50;
     }
 
-    .form-status {
-      text-align: center;
-      margin-top: 10px;
-      color: #66fcf1;
+    .present:hover {
+      background-color: #45a049;
     }
 
-    /* Footer */
-    footer {
-      background: #0b0c10;
-      text-align: center;
-      padding: 20px;
-      color: #66fcf1;
+    .absent {
+      background-color: #f44336;
+    }
+
+    .absent:hover {
+      background-color: #e53935;
+    }
+
+    .marked {
+      background-color: #666 !important;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 600px) {
+      .student {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .actions {
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Student Attendance Dashboard</h1>
 
-  <header class="hero">
-    <div class="overlay">
-      <div class="content">
-        <h1>I'm Abubakar Nasiru Almansur</h1>
-        <p>Full Stack Developer | Student at Northwest University Kano</p>
-        <a href="#contact" class="btn">Hire Me</a>
+    <!-- Week Selector -->
+    <div class="week-selector">
+      <select id="weekSelect">
+        <option value="week1">Week 1</option>
+        <option value="week2">Week 2</option>
+        <option value="week3">Week 3</option>
+        <option value="week4">Week 4</option>
+      </select>
+    </div>
+
+    <!-- Summary Section -->
+    <div class="summary">
+      <div>
+        <span id="total">0</span>Total
+      </div>
+      <div>
+        <span id="present">0</span>Present
+      </div>
+      <div>
+        <span id="absent">0</span>Absent
       </div>
     </div>
-  </header>
 
-  <section class="about" id="about">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>
-        I'm a passionate Full Stack web developer with a strong foundation in both front-end and back-end technologies. I specialize in building modern, responsive, and dynamic websites tailored to your business needs.
-      </p>
+    <!-- Student List -->
+    <div class="student-list" id="studentList">
+      <!-- Student cards will be dynamically added -->
     </div>
-  </section>
-
-  <section class="services" id="services">
-    <div class="container">
-      <h2>My Services</h2>
-      <div class="service-grid">
-        <div class="service-card">
-          <h3>Frontend Development</h3>
-          <p>Pixel-perfect, responsive UIs using HTML, CSS, JavaScript, and frameworks like React.</p>
-        </div>
-        <div class="service-card">
-          <h3>Backend Development</h3>
-          <p>Robust backend systems using Node.js, Express, Python, PHP, and databases like MongoDB or MySQL.</p>
-        </div>
-        <div class="service-card">
-          <h3>Full Website Design</h3>
-          <p>From concept to deployment, I build complete websites that are fast, secure, and scalable.</p>
-        </div>
-        <div class="service-card">
-          <h3>Website Maintenance</h3>
-          <p>Keep your site updated, secure, and running smoothly with regular maintenance and support.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="contact" id="contact">
-    <div class="container">
-      <h2>Contact Me</h2>
-      <div class="contact-info">
-        <p><strong>Phone:</strong> 09076729352</p>
-        <p><strong>Email:</strong> abubakarnasirualmansur@gmail.com</p>
-        <p><strong>Location:</strong> Northwest University, Kano, Nigeria</p>
-      </div>
-      <form class="contact-form" id="contactForm">
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <textarea placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-      </form>
-      <p class="form-status" id="formStatus"></p>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Abubakar Nasiru Almansur. All rights reserved.</p>
-  </footer>
+  </div>
 
   <script>
-    // Contact form handler
-    document.getElementById('contactForm')?.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const status = document.getElementById('formStatus');
-      status.textContent = "Thank you! Your message has been sent.";
-      this.reset();
+    // Sample student data
+    const students = [
+      { id: "UG22ICT1014", name: "Abubakar Nasiru Almansur" },
+      { id: "UG22SEN1001", name: "Muhsin Ibrahim" },
+      { id: "UG22ICT1111", name: "Muhammad Junaidu" },
+      { id: "UG22ICT1029", name: "Mansur Mannir" },
+      { id: "UG22ICT1109", name: "Umar Musa" }
+    ];
+
+    const attendance = {}; // Store attendance per week per student
+
+    const studentList = document.getElementById("studentList");
+    const weekSelect = document.getElementById("weekSelect");
+    const totalSpan = document.getElementById("total");
+    const presentSpan = document.getElementById("present");
+    const absentSpan = document.getElementById("absent");
+
+    function updateSummary() {
+      let presentCount = 0;
+      let absentCount = 0;
+      const currentWeek = weekSelect.value;
+
+      students.forEach(student => {
+        const status = attendance[`${currentWeek}-${student.id}`];
+        if (status === "present") presentCount++;
+        else if (status === "absent") absentCount++;
+      });
+
+      totalSpan.textContent = students.length;
+      presentSpan.textContent = presentCount;
+      absentSpan.textContent = absentCount;
+    }
+
+    function renderStudents() {
+      studentList.innerHTML = "";
+      const currentWeek = weekSelect.value;
+
+      students.forEach(student => {
+        const studentDiv = document.createElement("div");
+        studentDiv.className = "student";
+
+        const infoDiv = document.createElement("div");
+        infoDiv.className = "student-info";
+        infoDiv.innerHTML = `<div class="student-name">${student.name}</div><div class="student-id">ID: ${student.id}</div>`;
+        studentDiv.appendChild(infoDiv);
+
+        const actionsDiv = document.createElement("div");
+        actionsDiv.className = "actions";
+
+        const presentBtn = document.createElement("button");
+        presentBtn.textContent = "Present";
+        presentBtn.className = "present";
+        presentBtn.addEventListener("click", () => {
+          markAttendance(student.id, currentWeek, "present");
+          renderStudents();
+        });
+
+        const absentBtn = document.createElement("button");
+        absentBtn.textContent = "Absent";
+        absentBtn.className = "absent";
+        absentBtn.addEventListener("click", () => {
+          markAttendance(student.id, currentWeek, "absent");
+          renderStudents();
+        });
+
+        const key = `${currentWeek}-${student.id}`;
+        const markedStatus = attendance[key];
+
+        if (markedStatus === "present") {
+          presentBtn.textContent = "Present";
+          presentBtn.className += " marked";
+          actionsDiv.appendChild(presentBtn);
+        } else if (markedStatus === "absent") {
+          absentBtn.textContent = "Absent";
+          absentBtn.className += " marked";
+          actionsDiv.appendChild(absentBtn);
+        } else {
+          actionsDiv.appendChild(presentBtn);
+          actionsDiv.appendChild(absentBtn);
+        }
+
+        studentDiv.appendChild(actionsDiv);
+        studentList.appendChild(studentDiv);
+      });
+
+      updateSummary();
+    }
+
+    function markAttendance(studentId, week, status) {
+      attendance[`${week}-${studentId}`] = status;
+    }
+
+    weekSelect.addEventListener("change", () => {
+      renderStudents();
     });
+
+    // Initial render
+    renderStudents();
   </script>
 </body>
 </html>
